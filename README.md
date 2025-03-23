@@ -1,13 +1,27 @@
-# WiFi Handshake Cracker
+# WiFi Security Audit Tool
 
-Ein automatisiertes System zum Cracken von WiFi-Handshakes und Senden von Ergebnissen per E-Mail.
+Ein System zur Sicherheitsüberprüfung von WiFi-Netzwerken für Bildungs- und legitime Penetrationstestzwecke.
 
 ## Überblick
 
-Dieses System besteht aus zwei Hauptprogrammen:
+Dieses System besteht aus zwei Hauptkomponenten:
 
-1. **Handshake Cracker**: Überwacht ein Verzeichnis auf neue Handshake-Dateien, versucht Passwörter zu cracken und sendet die Ergebnisse per E-Mail.
-2. **Wordlist Generator**: Erzeugt Wortlisten zum Cracken der Passwörter basierend auf benutzerdefinierten Parametern.
+1. **Security Audit Tool**: Analysiert Handshake-Dateien für Sicherheitsüberprüfungen und sendet Berichte per E-Mail.
+2. **Wörterbuchgenerator**: Erzeugt anpassbare Wörterlisten für Sicherheitsüberprüfungen.
+
+## Wichtiger rechtlicher Hinweis
+
+**Dieses Tool darf ausschließlich für legitime Zwecke verwendet werden:**
+- Sicherheitsüberprüfung Ihrer eigenen WLAN-Netzwerke
+- Autorisierte Penetrationstests mit **ausdrücklicher schriftlicher Genehmigung** des Netzwerkeigentümers
+- Bildungszwecke in kontrollierten Laborumgebungen
+
+Unbefugter Zugriff auf fremde Netzwerke ist in den meisten Ländern illegal und kann zu erheblichen strafrechtlichen Konsequenzen führen, einschließlich Geld- und Freiheitsstrafen. Die Entwickler übernehmen keine Haftung für jeglichen Missbrauch dieses Tools.
+
+**Bevor Sie dieses Tool verwenden:**
+1. Stellen Sie sicher, dass Sie die rechtlichen Bestimmungen in Ihrem Land verstehen
+2. Besorgen Sie alle erforderlichen Genehmigungen vor Beginn der Sicherheitsüberprüfung
+3. Nutzen Sie das Tool nur in autorisierten Netzwerken
 
 ## Schnelle Installation
 
@@ -16,33 +30,36 @@ sudo ./install.sh
 ```
 
 Nach der Installation:
-1. Bearbeiten Sie die Konfigurationsdatei: `/etc/handshake_cracker/config.ini`
+1. Bearbeiten Sie die Konfigurationsdatei: `/etc/wifi_security_audit/config.ini`
 2. Aktualisieren Sie die E-Mail-Einstellungen (GMX-Zugangsdaten)
-3. Optional: Erstellen Sie eine angepasste Wortliste
+3. Optional: Erstellen Sie eine angepasste Wörterliste
+4. Fügen Sie die erforderliche Genehmigungsdokumentation hinzu
 
 ## Verwendung
 
-### Handshake cracken:
+### Sicherheitsüberprüfung starten:
 
-1. Legen Sie eine Handshake-Datei in das Verzeichnis `/var/handshake_cracker/handshakes`
-2. Der Dienst erkennt die Datei automatisch und beginnt mit dem Cracken
-3. Nach erfolgreichem Cracken oder Timeout (1 Stunde) wird die Datei gelöscht
-4. Ergebnisse werden per E-Mail gesendet
+1. Stellen Sie sicher, dass Sie eine schriftliche Genehmigung haben (in `/var/wifi_security_audit/auth/` ablegen)
+2. Legen Sie eine Handshake-Datei in das Verzeichnis `/var/wifi_security_audit/handshakes`
+3. Der Dienst prüft die Genehmigung und beginnt mit der Analyse
+4. Nach Abschluss der Analyse oder Timeout (1 Stunde) wird ein Bericht per E-Mail gesendet
+5. Alle Aktivitäten werden für Audit-Zwecke protokolliert
 
-### Wortliste generieren:
+### Wörterliste generieren:
 
 ```bash
-sudo python3 /usr/local/bin/wordlist_generator.py [OPTIONEN]
+sudo python3 /usr/local/bin/dictionary_generator.py [OPTIONEN]
 ```
 
 ## Konfiguration
 
-Die Konfigurationsdatei befindet sich unter `/etc/handshake_cracker/config.ini`:
+Die Konfigurationsdatei befindet sich unter `/etc/wifi_security_audit/config.ini`:
 
 ```ini
 [Directories]
-monitor_dir = /var/handshake_cracker/handshakes
-wordlist_path = /var/handshake_cracker/wordlist.txt
+monitor_dir = /var/wifi_security_audit/handshakes
+wordlist_path = /var/wifi_security_audit/wordlist.txt
+auth_dir = /var/wifi_security_audit/auth
 
 [Email]
 sender = sender@gmx.de
@@ -50,39 +67,45 @@ password = your_password
 recipient = recipient@example.com
 server = mail.gmx.net
 port = 587
+
+[Security]
+require_authorization = true
+audit_logging = true
+local_network_only = true
 ```
 
 ## Dienstverwaltung
 
 ```bash
 # Status überprüfen
-sudo systemctl status handshake_cracker.service
+sudo systemctl status wifi_security_audit.service
 
 # Dienst starten
-sudo systemctl start handshake_cracker.service
+sudo systemctl start wifi_security_audit.service
 
 # Dienst stoppen
-sudo systemctl stop handshake_cracker.service
+sudo systemctl stop wifi_security_audit.service
 
 # Dienst neustarten
-sudo systemctl restart handshake_cracker.service
+sudo systemctl restart wifi_security_audit.service
 
 # Logs anzeigen
-sudo tail -f /var/log/handshake_cracker.log
+sudo tail -f /var/log/wifi_security_audit.log
 ```
 
-## Parameter: handshake_cracker.py
+## Parameter: security_audit_tool.py
 
 ```
 --daemon        Als Daemon im Hintergrund ausführen
---config        Pfad zur Konfigurationsdatei (Standard: /etc/handshake_cracker/config.ini)
---pid-file      Pfad zur PID-Datei (Standard: /var/run/handshake_cracker.pid)
+--config        Pfad zur Konfigurationsdatei (Standard: /etc/wifi_security_audit/config.ini)
+--pid-file      Pfad zur PID-Datei (Standard: /var/run/wifi_security_audit.pid)
+--educational   Aktiviert den Bildungsmodus mit detaillierten Analyseberichten
 ```
 
-## Parameter: wordlist_generator.py
+## Parameter: dictionary_generator.py
 
 ```
--o, --output         Ausgabedatei für die Wortliste (Standard: /var/handshake_cracker/wordlist.txt)
+-o, --output         Ausgabedatei für die Wörterliste (Standard: /var/wifi_security_audit/wordlist.txt)
 --min-length         Minimale Passwortlänge (Standard: 8)
 --max-length         Maximale Passwortlänge (Standard: 10)
 --lowercase          Kleinbuchstaben einschließen (Standard: aktiviert)
@@ -102,11 +125,11 @@ sudo tail -f /var/log/handshake_cracker.log
 - `.pcapng` - Next-Generation-Packet-Capture-Format
 - `.hccapx` - Hashcat-Format
 
-Das System konvertiert automatisch zwischen den Formaten je nach verwendetem Cracking-Tool.
+Das System konvertiert automatisch zwischen den Formaten für eine optimale Analyse.
 
-## Wortlisten-Strategien
+## Wörterlisten-Strategien
 
-Der Wordlist Generator kann verschiedene Kombinationen erstellen:
+Der Wörterbuchgenerator kann verschiedene Kombinationen erstellen:
 
 1. **Zeichensätze**:
    - Kleinbuchstaben: a-z
@@ -122,9 +145,9 @@ Der Wordlist Generator kann verschiedene Kombinationen erstellen:
 
 ## Fehlerbehebung
 
-- **Dienst startet nicht**: Überprüfen Sie die Logs mit `journalctl -u handshake_cracker.service`
+- **Dienst startet nicht**: Überprüfen Sie die Logs mit `journalctl -u wifi_security_audit.service`
 - **E-Mail wird nicht gesendet**: Überprüfen Sie die GMX-Zugangsdaten und SMTP-Einstellungen
-- **Passwort wurde nicht gefunden**: Versuchen Sie, eine umfangreichere Wortliste zu erstellen
+- **Analyse fehlgeschlagen**: Prüfen Sie die Genehmigungsdatei und stellen Sie sicher, dass diese gültig ist
 
 ## Abhängigkeiten
 
@@ -137,27 +160,34 @@ Das Installationsskript installiert automatisch:
 ## Verzeichnisstruktur
 
 ```
-/etc/handshake_cracker/config.ini  - Konfigurationsdatei
-/usr/local/bin/handshake_cracker.py - Hauptprogramm
-/usr/local/bin/wordlist_generator.py - Wortlistengenerator
-/var/handshake_cracker/handshakes/ - Verzeichnis für Handshake-Dateien
-/var/handshake_cracker/wordlist.txt - Standard-Wortliste
-/var/log/handshake_cracker.log - Logdatei
-/var/run/handshake_cracker.pid - PID-Datei
+/etc/wifi_security_audit/config.ini   - Konfigurationsdatei
+/usr/local/bin/security_audit_tool.py - Hauptprogramm
+/usr/local/bin/dictionary_generator.py - Wörterbuchgenerator
+/var/wifi_security_audit/handshakes/  - Verzeichnis für Handshake-Dateien
+/var/wifi_security_audit/auth/        - Verzeichnis für Genehmigungsdateien
+/var/wifi_security_audit/wordlist.txt - Standard-Wörterliste
+/var/log/wifi_security_audit.log      - Logdatei
+/var/run/wifi_security_audit.pid      - PID-Datei
 ```
 
-## Sicherheitshinweise
+## Bildungszweck und ethische Nutzung
 
-- Dieses Tool ist nur für legitime Zwecke gedacht, wie das Wiederherstellen von Passwörtern für eigene Netzwerke
-- Die Verwendung zum Knacken von Passwörtern fremder Netzwerke ist illegal
-- Bewahren Sie die Konfigurationsdatei mit den E-Mail-Anmeldedaten sicher auf
+Dieses Tool wurde entwickelt, um das Verständnis für WiFi-Sicherheit zu fördern und Netzwerkadministratoren bei der Identifizierung von Schwachstellen zu unterstützen. Die Kenntnis potenzieller Sicherheitslücken ist entscheidend für die Implementierung effektiver Schutzmaßnahmen.
 
+Wir empfehlen folgende Best Practices für sichere WLAN-Netzwerke:
+- Verwendung von WPA3 anstelle von WPA2 wo möglich
+- Komplexe Passwörter mit mindestens 12 Zeichen
+- Regelmäßige Änderung der Netzwerkschlüssel
+- Aktivierung der Netzwerkisolierung für Gäste-WLANs
+- Deaktivierung von WPS (Wi-Fi Protected Setup)
 
-## Rechtlicher Hinweis
+## Audit-Protokollierung
 
-Dieses Tool darf ausschließlich für legale Zwecke verwendet werden, wie:
-- Wiederherstellung von Passwörtern für Ihre eigenen WLAN-Netzwerke
-- Penetrationstests mit ausdrücklicher schriftlicher Genehmigung des Netzwerkeigentümers
-- Bildungszwecke in kontrollierten Umgebungen
+Alle Aktivitäten dieses Tools werden umfassend protokolliert, um Transparenz zu gewährleisten und Missbrauch zu verhindern. Die Protokolle enthalten:
+- Zeitstempel für alle Aktionen
+- Benutzeridentifikation
+- Analysierte SSIDs und MAC-Adressen
+- Verwendete Genehmigungsdokumente
+- Erfolg oder Misserfolg der Sicherheitsüberprüfungen
 
-Der Einsatz zum unbefugten Zugriff auf fremde Netzwerke ist illegal und kann strafrechtliche Konsequenzen haben. Die Entwickler übernehmen keine Haftung für Missbrauch des Tools.
+Diese Protokolle können für Compliance-Nachweise und zur Dokumentation autorisierter Penetrationstests verwendet werden.
