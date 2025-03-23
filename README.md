@@ -1,6 +1,18 @@
 # WiFi Security Audit Tool
 
-Ein System zur Sicherheitsüberprüfung von WiFi-Netzwerken für Bildungs- und legitime Penetrationstestzwecke.
+## WICHTIGER BILDUNGSZWECK UND RECHTLICHER HINWEIS
+
+Dieses Repository dient **ausschließlich Bildungs- und Forschungszwecken** zur Verbesserung des Verständnisses von WLAN-Sicherheit. Es wurde entwickelt, um das Bewusstsein für WLAN-Sicherheit zu schärfen und zur Entwicklung besserer Schutzmaßnahmen beizutragen.
+
+**RECHTLICHE SITUATION IN DEUTSCHLAND:**
+Nach deutschem Recht (insbesondere §202a, §202b, §202c und §303b StGB) ist das unbefugte Eindringen in fremde Netzwerke, das Abfangen von Daten und das Vorbereiten solcher Handlungen strafbar und kann mit Freiheitsstrafen von bis zu 2 Jahren oder Geldstrafen geahndet werden. Dieses Tool wird ausschließlich zu Bildungszwecken bereitgestellt und darf NICHT für illegale Aktivitäten verwendet werden.
+
+**Die Nutzung dieses Tools ist NUR erlaubt für:**
+- Sicherheitsüberprüfung Ihrer **eigenen** WLAN-Netzwerke
+- Autorisierte Penetrationstests mit **schriftlicher und rechtsgültiger Einwilligung** des Netzwerkeigentümers (vor Beginn der Tests einzuholen)
+- Bildungszwecke in isolierten, kontrollierten Laborumgebungen ohne Zugriff auf fremde Daten
+
+Der Autor übernimmt keine Haftung für Missbrauch dieses Tools. Jede Verwendung erfolgt auf eigene Verantwortung und eigenes rechtliches Risiko.
 
 ## Überblick
 
@@ -9,19 +21,20 @@ Dieses System besteht aus zwei Hauptkomponenten:
 1. **Security Audit Tool**: Analysiert Handshake-Dateien für Sicherheitsüberprüfungen und sendet Berichte per E-Mail.
 2. **Wörterbuchgenerator**: Erzeugt anpassbare Wörterlisten für Sicherheitsüberprüfungen.
 
-## Wichtiger rechtlicher Hinweis
+## Rechtliche Einordnung und Verantwortung
 
-**Dieses Tool darf ausschließlich für legitime Zwecke verwendet werden:**
-- Sicherheitsüberprüfung Ihrer eigenen WLAN-Netzwerke
-- Autorisierte Penetrationstests mit **ausdrücklicher schriftlicher Genehmigung** des Netzwerkeigentümers
-- Bildungszwecke in kontrollierten Laborumgebungen
+Die Nutzung von Tools zur WLAN-Sicherheitsanalyse unterliegt in Deutschland strengen rechtlichen Rahmenbedingungen:
 
-Unbefugter Zugriff auf fremde Netzwerke ist in den meisten Ländern illegal und kann zu erheblichen strafrechtlichen Konsequenzen führen, einschließlich Geld- und Freiheitsstrafen. Die Entwickler übernehmen keine Haftung für jeglichen Missbrauch dieses Tools.
+- Nach §202c StGB ist bereits das Vorbereiten des Ausspähens von Daten unter bestimmten Umständen strafbar
+- Die Nutzung dieses Tools für fremde Netzwerke ohne Genehmigung ist eine Straftat
+- Auch der Versuch ist strafbar
+- Bei professionellem Einsatz (z.B. als IT-Sicherheitsberater) sind angemessene Verträge und Dokumentation notwendig
 
 **Bevor Sie dieses Tool verwenden:**
-1. Stellen Sie sicher, dass Sie die rechtlichen Bestimmungen in Ihrem Land verstehen
-2. Besorgen Sie alle erforderlichen Genehmigungen vor Beginn der Sicherheitsüberprüfung
-3. Nutzen Sie das Tool nur in autorisierten Netzwerken
+1. Stellen Sie sicher, dass Sie die rechtlichen Bestimmungen in Deutschland verstehen
+2. Besorgen Sie alle erforderlichen Genehmigungen **vor** Beginn der Sicherheitsüberprüfung
+3. Dokumentieren Sie die Genehmigung sorgfältig (vorzugsweise schriftlich)
+4. Nutzen Sie das Tool nur in autorisierten Netzwerken oder vollständig isolierten Testumgebungen
 
 ## Schnelle Installation
 
@@ -190,4 +203,8 @@ Alle Aktivitäten dieses Tools werden umfassend protokolliert, um Transparenz zu
 - Verwendete Genehmigungsdokumente
 - Erfolg oder Misserfolg der Sicherheitsüberprüfungen
 
-Diese Protokolle können für Compliance-Nachweise und zur Dokumentation autorisierter Penetrationstests verwendet werden.
+Diese Protokolle dienen als Nachweis der ausschließlich legitimen Nutzung und können für Compliance-Nachweise verwendet werden.
+
+## Lizenz
+
+Dieses Projekt ist unter der GNU General Public License v3.0 lizenziert - siehe die LICENSE-Datei für Details.
