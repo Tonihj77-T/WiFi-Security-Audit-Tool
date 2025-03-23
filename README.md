@@ -151,3 +151,13 @@ Das Installationsskript installiert automatisch:
 - Dieses Tool ist nur für legitime Zwecke gedacht, wie das Wiederherstellen von Passwörtern für eigene Netzwerke
 - Die Verwendung zum Knacken von Passwörtern fremder Netzwerke ist illegal
 - Bewahren Sie die Konfigurationsdatei mit den E-Mail-Anmeldedaten sicher auf
+
+
+## Rechtlicher Hinweis
+
+Dieses Tool darf ausschließlich für legale Zwecke verwendet werden, wie:
+- Wiederherstellung von Passwörtern für Ihre eigenen WLAN-Netzwerke
+- Penetrationstests mit ausdrücklicher schriftlicher Genehmigung des Netzwerkeigentümers
+- Bildungszwecke in kontrollierten Umgebungen
+
+Der Einsatz zum unbefugten Zugriff auf fremde Netzwerke ist illegal und kann strafrechtliche Konsequenzen haben. Die Entwickler übernehmen keine Haftung für Missbrauch des Tools.
