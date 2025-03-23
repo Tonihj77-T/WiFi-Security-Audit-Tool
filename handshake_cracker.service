@@ -1,0 +1,14 @@
+[Unit]
+Description=WiFi Handshake Cracker Service
+After=network.target
+
+[Service]
+Type=forking
+User=root
+ExecStart=/usr/bin/python3 /usr/local/bin/handshake_cracker.py --daemon
+PIDFile=/var/run/handshake_cracker.pid
+Restart=on-failure
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
