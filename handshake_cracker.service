@@ -1,14 +1,20 @@
 [Unit]
-Description=WiFi Handshake Cracker Service
+Description=WiFi Security Audit Tool Service
 After=network.target
-
 [Service]
 Type=forking
 User=root
-ExecStart=/usr/bin/python3 /usr/local/bin/handshake_cracker.py --daemon
-PIDFile=/var/run/handshake_cracker.pid
+ExecStart=/usr/bin/python3 /usr/local/bin/security_audit_tool.py --daemon
+PIDFile=/var/run/wifi_security_audit.pid
 Restart=on-failure
 RestartSec=60
+
+# Security settings
+PrivateTmp=true
+ProtectSystem=full
+NoNewPrivileges=true
+ReadWritePaths=/var/wifi_security_audit /var/log/wifi_security_audit.log
+ProtectHome=true
 
 [Install]
 WantedBy=multi-user.target
